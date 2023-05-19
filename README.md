@@ -3,7 +3,7 @@ A simple chat rooms website
 
 ## Preview
 
-
+https://github.com/moSa963/chatroom/assets/65834849/86ccb562-4549-4f27-8eeb-e99a1a14dd3d
 
 ## Prerequisites
   - you should ensure that your local machine has PHP and [Composer](https://getcomposer.org/) installed. for more information visit [laravel docs](https://laravel.com/docs/9.x/installation)
