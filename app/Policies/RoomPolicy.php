@@ -5,11 +5,10 @@ namespace App\Policies;
 use App\Models\Permission;
 use App\Models\Room;
 use App\Models\User;
-use Illuminate\Auth\Access\HandlesAuthorization;
+use App\Services\RoomSlowMode;
 
 class RoomPolicy
 {
-    use HandlesAuthorization;
 
     public function view(User $user, Room $room)
     {
@@ -47,5 +46,21 @@ class RoomPolicy
     public function delete(User $user, Room $room)
     {
         return $room->users_room()->where("user_id", $user->id)->where("owner", true)->exists();
+    }
+
+    public function view_messages(User $user, Room $room)
+    {
+        $ru = $room->users_room()->where("user_id", $user->id)->first();
+
+        return boolval($ru);
+    }
+
+    public function create_message(User $user, Room $room)
+    {
+        $ru = $room->users_room()->where("user_id", $user->id)->first();
+        return $ru &&
+            ($ru->owner ||
+                ($ru->permissions()->where("permissions.id", Permission::$WRITE)->exists()
+                    && RoomSlowMode::check($room, $user)));
     }
 }

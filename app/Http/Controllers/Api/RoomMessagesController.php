@@ -15,7 +15,7 @@ class RoomMessagesController extends Controller
 {
     public function index(Request $request, Room $room)
     {
-        $this->authorize("viewAny", [Message::class, $room]);
+        $this->authorize("view_messages", $room);
 
         $messages = $room->messages()
             ->orderBy('created_at', 'desc')
@@ -26,7 +26,7 @@ class RoomMessagesController extends Controller
 
     public function store(StoreRoomMessageRequest $request, Room $room)
     {
-        $this->authorize("create", [Message::class, $room]);
+        $this->authorize("create_message", $room);
 
         $user = $request->user();
 

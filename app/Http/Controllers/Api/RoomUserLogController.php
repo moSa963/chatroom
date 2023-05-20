@@ -13,7 +13,7 @@ class RoomUserLogController extends Controller
 {
     public function index(Request $request, Room $room, $username)
     {
-        $this->authorize("viewAny", [Message::class, $room]);
+        $this->authorize("view_messages", $room);
 
         $user = User::where("username", $username)->firstOrFail();
 

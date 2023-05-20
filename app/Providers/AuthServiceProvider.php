@@ -3,6 +3,9 @@
 namespace App\Providers;
 
 // use Illuminate\Support\Facades\Gate;
+
+use App\Policies\RoomPolicy;
+use App\Policies\UserRoomPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
@@ -15,7 +18,6 @@ class AuthServiceProvider extends ServiceProvider
     protected $policies = [
         Room::class => RoomPolicy::class,
         UserRoom::class => UserRoomPolicy::class,
-        Message::class => RoomMessagePolicy::class,
     ];
 
     /**
