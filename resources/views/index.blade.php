@@ -1,22 +1,17 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="utf-8" />
-    <link rel="icon" href="/favicon.ico" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <meta name="description" content="Web site created using create-react-app" />
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="pusher" content="{{ env('PUSHER_APP_KEY', '') }}" />
-    <link rel="apple-touch-icon" hr ef="/logo192.png" />
-    <link rel="manifest" href="/manifest.json" />
-    <title>Chat Rooms</title>
-    <script defer="defer" src="/static/js/main.b487723d.js"></script>
-    <link href="/static/css/main.d9034e79.css" rel="stylesheet">
-</head>
-
-<body><noscript>You need to enable JavaScript to run this app.</noscript>
+    <meta name="theme-color" content="#000000" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite + React</title>
+    <script type="module" crossorigin src="/assets/index-ea365445.js"></script>
+    <link rel="stylesheet" href="/assets/index-4cf7b2fa.css">
+  </head>
+  <body>
     <div id="root"></div>
-</body>
-
+    
+  </body>
 </html>
