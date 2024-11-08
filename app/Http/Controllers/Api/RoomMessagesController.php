@@ -9,13 +9,14 @@ use App\Models\Message;
 use App\Models\Room;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 
 class RoomMessagesController extends Controller
 {
     public function index(Request $request, Room $room)
     {
-        $this->authorize("view_messages", $room);
+        Gate::authorize("view_messages", $room);
 
         $messages = $room->messages()
             ->orderBy('created_at', 'desc')
@@ -26,7 +27,7 @@ class RoomMessagesController extends Controller
 
     public function store(StoreRoomMessageRequest $request, Room $room)
     {
-        $this->authorize("create_message", $room);
+        Gate::authorize("create_message", $room);
 
         $user = $request->user();
 
@@ -37,7 +38,7 @@ class RoomMessagesController extends Controller
 
     public function destroy(Request $request, Room $room, Message $message)
     {
-        $this->authorize("manage_messages", $room);
+        Gate::authorize("manage_messages", $room);
 
         abort_if($message->room_id !== $room->id, 404);
 

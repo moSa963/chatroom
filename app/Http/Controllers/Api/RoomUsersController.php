@@ -12,12 +12,13 @@ use App\Models\User;
 use App\Models\UserRoom;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class RoomUsersController extends Controller
 {
     public function index(Request $request, Room $room)
     {
-        $this->authorize("view", $room);
+        Gate::authorize("view", $room);
 
         $users = $room->users()
             ->where("username", "like", "%{$request->query('key', '')}%")
@@ -31,7 +32,7 @@ class RoomUsersController extends Controller
 
     public function show(Request $request, Room $room, $username)
     {
-        $this->authorize("view", $room);
+        Gate::authorize("view", $room);
 
         $user = User::where("username", $username)->firstOrFail();
 
@@ -46,7 +47,7 @@ class RoomUsersController extends Controller
 
         $user_room = $user->user_rooms()->where("room_id", $room->id)->firstOrFail();
 
-        $this->authorize("delete", $user_room);
+        Gate::authorize("delete", $user_room);
 
         $user_room->delete();
 

@@ -11,6 +11,7 @@ use App\Http\Resources\ShowRoomResource;
 use App\Models\Room;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 
 class RoomsController extends Controller
@@ -29,7 +30,7 @@ class RoomsController extends Controller
 
     public function store(StoreRoomRequest $request)
     {
-        //$this->authorize("create", Room::class);
+        //Gate::authorize("create", Room::class);
 
         $room = $request->store($request->user());
         $room->owner = "1";
@@ -38,7 +39,7 @@ class RoomsController extends Controller
 
     public function update(UpdateRoomRequest $request, Room $room)
     {
-        $this->authorize("manage_room", $room);
+        Gate::authorize("manage_room", $room);
 
         $request->update($room);
 
@@ -47,7 +48,7 @@ class RoomsController extends Controller
 
     public function destroy(Request $request, Room $room)
     {
-        $this->authorize("delete", $room);
+        Gate::authorize("delete", $room);
 
         $files = $room->messages()->select("path")->where("path", "!=", null)->pluck("path")->toArray();
 

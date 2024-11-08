@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreRoomImageRequest;
 use App\Models\Room;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 
 class RoomImageController extends Controller
@@ -19,7 +20,7 @@ class RoomImageController extends Controller
 
     public function store(StoreRoomImageRequest $reuset, Room $room)
     {
-        $this->authorize("manage_room", $room);
+        Gate::authorize("manage_room", $room);
 
         $reuset->store($room);
 

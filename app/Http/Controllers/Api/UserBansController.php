@@ -10,12 +10,13 @@ use App\Models\UserBan;
 use App\Models\UserRoom;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class UserBansController extends Controller
 {
     public function index(Request $request, Room $room)
     {
-        $this->authorize("manage_members", $room);
+        Gate::authorize("manage_members", $room);
 
         $users = $room->banned_users()
             ->where("username", "like", "%{$request->query('key', '')}%")
@@ -26,7 +27,7 @@ class UserBansController extends Controller
 
     public function store(Request $request, Room $room, $username)
     {
-        $this->authorize("manage_members", $room);
+        Gate::authorize("manage_members", $room);
 
         $user = User::where("username", $username)->firstOrFail();
 
@@ -50,7 +51,7 @@ class UserBansController extends Controller
     {
         $user = User::where("username", $username)->firstOrFail();
 
-        $this->authorize("manage_members", $room);
+        Gate::authorize("manage_members", $room);
 
         UserBan::where("user_id", $user->id)->where("room_id", $room->id)->delete();
 

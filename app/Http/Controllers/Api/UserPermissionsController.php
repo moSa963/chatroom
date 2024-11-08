@@ -10,12 +10,13 @@ use App\Models\User;
 use App\Models\UserRoom;
 use App\Models\UserRoomPermission;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class UserPermissionsController extends Controller
 {
     public function store(Request $request, Room $room, $username, Permission $permission)
     {
-        $this->authorize("manage_permissions", $room);
+        Gate::authorize("manage_permissions", $room);
 
         $user = User::where("username", $username)->firstOrFail();
 
@@ -33,7 +34,7 @@ class UserPermissionsController extends Controller
 
     public function destroy(Request $request, Room $room, $username, Permission $permission)
     {
-        $this->authorize("manage_permissions", $room);
+        Gate::authorize("manage_permissions", $room);
 
         $user = User::where("username", $username)->firstOrFail();
 

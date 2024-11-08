@@ -9,12 +9,13 @@ use App\Models\Room;
 use App\Models\UserRoom;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class RoomRequestsController extends Controller
 {
     public function index(Request $request, Room $room)
     {
-        $this->authorize("manage_members", $room);
+        Gate::authorize("manage_members", $room);
 
         $users = $room->requests()
             ->select("users_rooms.*", "users.username as username")
@@ -52,7 +53,7 @@ class RoomRequestsController extends Controller
     {
         $req = $room->requests()->where("id", $req_id)->firstOrFail();
 
-        $this->authorize("manage_members", $room);
+        Gate::authorize("manage_members", $room);
 
         $req->verified_at = Carbon::today();
         $req->save();
@@ -64,7 +65,7 @@ class RoomRequestsController extends Controller
     {
         $user_room = UserRoom::where("room_id", $room->id)->where("user_id", $request->user()->id)->firstOrFail();
 
-        $this->authorize("delete", $user_room);
+        Gate::authorize("delete", $user_room);
 
         $user_room->delete();
 

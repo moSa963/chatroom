@@ -8,12 +8,13 @@ use App\Models\Message;
 use App\Models\Room;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class RoomUserLogController extends Controller
 {
     public function index(Request $request, Room $room, $username)
     {
-        $this->authorize("view_messages", $room);
+        Gate::authorize("view_messages", $room);
 
         $user = User::where("username", $username)->firstOrFail();
 

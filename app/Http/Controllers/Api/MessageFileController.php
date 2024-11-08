@@ -14,7 +14,7 @@ class MessageFileController extends Controller
 {
 	public function show(Request $request, Room $room, $id)
 	{
-		//$this->authorize("view", $room);
+		//Gate::authorize("view", $room);
 
 		$message = $room->messages()->where("path", $id)->firstOrFail();
 

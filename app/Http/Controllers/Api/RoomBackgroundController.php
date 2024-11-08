@@ -7,6 +7,7 @@ use App\Http\Requests\StoreRoomBackgroundRequest;
 use App\Http\Resources\ShowRoomResource;
 use App\Models\Room;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 
 class RoomBackgroundController extends Controller
@@ -20,7 +21,7 @@ class RoomBackgroundController extends Controller
 
     public function store(StoreRoomBackgroundRequest $reuset, Room $room)
     {
-        $this->authorize("manage_room", $room);
+        Gate::authorize("manage_room", $room);
 
         $room = $reuset->store($room);
 
@@ -29,7 +30,7 @@ class RoomBackgroundController extends Controller
 
     public function destroy(Request $reuset, Room $room)
     {
-        $this->authorize("manage_room", $room);
+        Gate::authorize("manage_room", $room);
 
         $room->update([
             "background_path" => null,

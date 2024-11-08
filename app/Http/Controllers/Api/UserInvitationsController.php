@@ -12,6 +12,7 @@ use App\Models\User;
 use App\Models\UserRoom;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class UserInvitationsController extends Controller
 {
@@ -28,7 +29,7 @@ class UserInvitationsController extends Controller
 
     public function store(Request $request, Room $room, $username)
     {
-        $this->authorize("manage_members", $room);
+        Gate::authorize("manage_members", $room);
 
         $user = User::where("username", $username)->first();
 
@@ -36,7 +37,7 @@ class UserInvitationsController extends Controller
 
         abort_if($room->banned_users()->where("user_id", $user->id)->exists(), 403, "this user is banned.");
 
-        UserRoom::firstOrcreate(
+        UserRoom::firstOrCreate(
             [
                 "user_id" => $user->id,
                 "room_id" => $room->id,
