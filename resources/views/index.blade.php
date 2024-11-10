@@ -8,7 +8,7 @@
     <meta name="theme-color" content="#000000" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{{ env('APP_NAME') }}</title>
-    <script type="module" crossorigin src="/assets/index-CaIhHF-A.js"></script>
+    <script type="module" crossorigin src="/assets/index-Y91MOtxq.js"></script>
     <link rel="stylesheet" href="/assets/index-8dbBr3yO.css">
 </head>
 

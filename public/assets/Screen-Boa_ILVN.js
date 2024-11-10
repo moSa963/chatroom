@@ -1,1 +1,0 @@
-import{j as t,B as s,S as i}from"./index-CaIhHF-A.js";const r=({children:e})=>t.jsx(s,{sx:{position:"relative",width:"100%",height:"100%",overflow:"auto",overflowX:"hidden",display:"flex",justifyContent:"center",py:4,flex:1,px:1},children:t.jsx(i,{spacing:2,sx:{width:"100%",maxWidth:800},children:e})});export{r as S};

@@ -1,1 +1,0 @@
-import{a as e,ai as a,aj as s,ak as t,al as o}from"./index-CaIhHF-A.js";const r=e("MuiBox",["root"]),l=a(),n=s({themeId:t,defaultTheme:l,defaultClassName:r.root,generateClassName:o.generate});export{n as B};
