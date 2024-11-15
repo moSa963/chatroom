@@ -18,15 +18,7 @@ class MessageFileController extends Controller
 
 		$message = $room->messages()->where("path", $id)->firstOrFail();
 
-		abort_if(!Storage::exists("files/{$message->path}"), 404);
-
-		$range = $request->header('Range', false);
-
-		if ($range) {
-			return $this->streamFile($message->type, Storage::path("files/{$message->path}"), $range, $message->name);
-		}
-
-		return Storage::response("files/{$message->path}", $message->name);
+		return redirect()->to(Storage::temporaryUrl("files/{$message->path}", now()->addMinutes(1)));
 	}
 
 	private function streamFile($contentType, $path, $range, $name)

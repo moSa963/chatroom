@@ -52,7 +52,7 @@ class StoreRoomMessageRequest extends FormRequest
     {
         return [
             "title" => ["required_if:file,null", "string", "max:1500"],
-            "file" => ["file", "max:40960"],
+            "file" => ["file", "max:512000"],
             "name" => ["required_unless:file,null"],
         ];
     }
